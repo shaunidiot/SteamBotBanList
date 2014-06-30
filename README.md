@@ -21,3 +21,14 @@ Methods
 `bool addban(ulong steam64)` - Add ban for user
 
 `bool removeban(ulong steam64)` - Remove ban for user
+
+Example
+--------------
+```C#
+        public override bool OnFriendAdd () {
+            if (ban.isBanned(OtherSID)) {
+                Bot.log.Success(Bot.SteamFriends.GetFriendPersonaName(OtherSID) + " (" + OtherSID.ToString() + ") added me!");
+                return true;
+            }
+            return false;
+        }```
