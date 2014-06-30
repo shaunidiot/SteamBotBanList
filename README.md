@@ -26,7 +26,7 @@ Example
 --------------
 ```C#
         public override bool OnFriendAdd () {
-            if (ban.isBanned(OtherSID)) {
+            if (!ban.isBanned(OtherSID)) {
                 Bot.log.Success(Bot.SteamFriends.GetFriendPersonaName(OtherSID) + " (" + OtherSID.ToString() + ") added me!");
                 return true;
             }
