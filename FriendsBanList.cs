@@ -24,9 +24,9 @@ namespace SteamBot {
         public void listAll () {
             if (fileExist()) {
                 XDocument bannedIDs = XDocument.Load(fileName);
-                if (bannedIDs.Descendants("bannedIDs").Elements("steamID").Any()) {
-                    foreach (var steamid in bannedIDs.Descendants("bannedIDs")) {
-                        Console.WriteLine(TAG + " Banned : " + steamid.Element("steamID").Value.ToString());
+                if (bannedIDs.Element("bannedIDs").Elements("steamID").Any()) {
+                    foreach (var steamid in bannedIDs.Element("bannedIDs").Elements("steamID")) {
+                        Console.WriteLine(TAG + " Banned : " + steamid.Value.ToString());
                     }
                 } else {
                     Console.WriteLine(TAG + " : No banned users.");     
@@ -42,9 +42,9 @@ namespace SteamBot {
         public bool isBanned (ulong steam64) {
             if (fileExist()) {
                 XDocument bannedIDs = XDocument.Load(fileName);
-                if (bannedIDs.Descendants("bannedIDs").Elements("steamID").Any()) {
-                    foreach (var steamid in bannedIDs.Descendants("bannedIDs")) {
-                        if (steamid.Element("steamID").Value.ToString().Equals(steam64.ToString())) {
+                if (bannedIDs.Element("bannedIDs").Elements("steamID").Any()) {
+                    foreach (var steamid in bannedIDs.Element("bannedIDs").Elements("steamID")) {
+                        if (steamid.Value.ToString().Equals(steam64.ToString())) {
                             return true;
                         }
                     }
@@ -94,10 +94,10 @@ namespace SteamBot {
         public bool removeBan (Bot bot, ulong steam64, bool unbanProfile) {
             if (fileExist()) {
                 XDocument bannedIDs = XDocument.Load(fileName);
-                if (bannedIDs.Descendants("bannedIDs").Elements("steamID").Any()) {
-                    foreach (var steamid in bannedIDs.Descendants("bannedIDs")) {
-                        if (steamid.Element("steamID").Value.ToString().Equals(steam64.ToString())) {
-                            bannedIDs.Descendants("bannedIDs")
+                if (bannedIDs.Element("bannedIDs").Elements("steamID").Any()) {
+                    foreach (var steamid in bannedIDs.Element("bannedIDs").Elements("steamID")) {
+                        if (steamid.Value.ToString().Equals(steam64.ToString())) {
+                            bannedIDs.Element("bannedIDs")
                         .Elements("steamID")
                         .Where(x => x.Value == steam64.ToString())
                         .Remove();
